@@ -1,6 +1,9 @@
+
 {$DOMAIN} {
+  import ./monitoring/Caddyfile
+
   handle / {
-    respond "✅ Promedis24 Stack is UP - No app yet, placeholder response." 200
+    respond "✅ Root stack is running - use /grafana," 200
   }
 
   tls {$EMAIL}

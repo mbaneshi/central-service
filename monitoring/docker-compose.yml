@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "${PROMETHEUS_PORT}:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - caddy_net
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    ports:
+      - "${GRAFANA_PORT}:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - caddy_net
+
+volumes:
+  grafana_data:
+
+networks:
+  caddy_net:
+    external: true
+
