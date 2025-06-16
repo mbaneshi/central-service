@@ -1,28 +1,18 @@
-version: '3.8'
 
 services:
-  app:
-    image: ${APP_IMAGE}
-    restart: unless-stopped
-    expose:
-      - "${APP_PORT}"
-
   caddy:
     image: caddy:latest
+    container_name: caddy
     restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
       - caddy_config:/config
-    depends_on:
-      - app
-    environment:
-      - DOMAIN=${DOMAIN}
-      - EMAIL=${EMAIL}
-      - APP_PORT=${APP_PORT}
+    env_file:
+      - .env
 
 volumes:
   caddy_data:
