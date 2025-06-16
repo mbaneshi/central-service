@@ -1,0 +1,5 @@
+{$DOMAIN} {
+  reverse_proxy app:{$APP_PORT}
+  tls {$EMAIL}
+}
+
