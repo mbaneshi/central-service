@@ -18,6 +18,8 @@ services:
       - grafana_data:/var/lib/grafana
     networks:
       - caddy_net
+    env_file:
+      - .env
 
 volumes:
   grafana_data:
